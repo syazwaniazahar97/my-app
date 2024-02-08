@@ -3,7 +3,6 @@ import axios from "axios";
 
 export default function Weather() {
   let [city, setCity] = useState("");
-  let [loaded, setLoaded] = useState(false);
   let [weather, setWeather] = useState({});
 
   function handleSubmit(event) {
@@ -18,7 +17,6 @@ export default function Weather() {
   }
 
   function showWeather(response) {
-    setLoaded(true);
     setWeather({
       temperature: response.data.main.temp,
       wind: response.data.wind.speed,
@@ -36,24 +34,18 @@ export default function Weather() {
   );
   let footer = (
     <footer>
-      <a
-        href="https://github.com/syazwaniazahar97/weather-app-react"
-        target="blank"
-      >
+      <a href="https://github.com/syazwaniazahar97/my-app" target="blank">
         Open source code
       </a>
-      , by {" "}
+      , by{" "}
       <a href="https://github.com/syazwaniazahar97" target="blank">
         Nur Syazwani Azahar
       </a>
     </footer>
   );
 
-  if (loaded) {
-    return (
-      <div>
-        {form}
-        <ul>
+let app = (
+  <ul>
           <li>Temperature: {Math.round(weather.temperature)}°C</li>
           <li>Description: {weather.description}</li>
           <li>Humidity: {weather.humidity}%</li>
@@ -62,15 +54,14 @@ export default function Weather() {
             <img src={weather.icon} alt={weather.description} />
           </li>
         </ul>
-        {footer}
-      </div>
-    );
-  } else {
+)
+
     return (
       <div>
         {form}
+        {app}
         {footer}
       </div>
     );
   }
-}
+
